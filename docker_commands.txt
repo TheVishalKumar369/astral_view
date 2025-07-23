@@ -1,0 +1,42 @@
+# Docker Commands for Cosmic Explorer Project
+
+# 1. Build all Docker images
+
+docker compose build
+
+# 2. Start all services (data, desktop app, web portal)
+# (Note: Only data collection runs automatically by default)
+
+docker compose up
+
+# 3. Run data collection only (fills data/raw/)
+
+docker compose run --rm data_service python scripts/collect_data.py
+
+# 4. Run data processing (clean/enrich data, saves to data/processed/)
+
+docker compose run --rm data_service python scripts/process_data.py
+
+# 5. Run data integration (merge all data for 3D world/app)
+
+docker compose run --rm data_service python scripts/integrate_cosmic_data.py
+
+# 6. Run the desktop app (if available)
+
+docker compose run --rm desktop_app python desktop_app/cosmic_explorer.py
+
+# 7. Start the web portal (React app)
+
+docker compose up web_portal
+
+# 8. Stop all running containers
+
+docker compose down
+
+# 9. View logs for a specific service (e.g., data_service)
+
+docker compose logs data_service
+
+# 10. (Optional) Run all data steps in one go (edit run_data_collection.sh or use this command)
+# (Uncomment and use if you want to automate all steps)
+# docker compose run --rm data_service bash -c "python scripts/collect_data.py && python scripts/process_data.py && python scripts/integrate_cosmic_data.py" 

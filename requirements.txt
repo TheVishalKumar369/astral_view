@@ -1,0 +1,19 @@
+# Core scientific stack
+pandas
+numpy
+scipy
+h5py
+pyarrow
+astropy
+astroquery
+requests
+matplotlib
+
+# For visualization (desktop app)
+ursina
+
+# For image/texture processing
+Pillow
+
+# For Jupyter (optional, for exploration)
+jupyterlab 

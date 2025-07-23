@@ -1,0 +1,69 @@
+services:
+  data_service:
+    build:
+      context: .
+      dockerfile: Dockerfile.data
+    image: cosmic_explorer_data
+    volumes:
+      - ./data:/workspace/data
+      - ./scripts:/workspace/scripts:ro
+      - ./requirements.txt:/workspace/requirements.txt:ro
+      - ./docker-compose.yml:/workspace/docker-compose.yml:ro
+      - ./Dockerfile.data:/workspace/Dockerfile.data:ro
+      - ./desktop_app:/workspace/desktop_app:ro
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - DISPLAY=:99
+      - PYTHONUNBUFFERED=1
+      - MPLBACKEND=Agg
+      - PYTHONPATH=/workspace
+    stdin_open: true
+    tty: true
+
+  desktop_app:
+    build:
+      context: .
+      dockerfile: Dockerfile.desktop
+    image: cosmic_explorer_desktop
+    volumes:
+      - ./data:/workspace/data
+      - ./desktop_app:/workspace/desktop_app:ro
+      - ./scripts:/workspace/scripts:ro
+      - ./requirements.txt:/workspace/requirements.txt:ro
+      - ./docker-compose.yml:/workspace/docker-compose.yml:ro
+      - ./Dockerfile.desktop:/workspace/Dockerfile.desktop:ro
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - DISPLAY=${DISPLAY}
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    stdin_open: true
+    tty: true
+
+  web_portal:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    image: cosmic_explorer_web
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./data/processed:/app/public/data:ro
+      - ./web_portal:/app/web_portal:ro
+      - ./docker-compose.yml:/app/docker-compose.yml:ro
+      - ./Dockerfile.web:/app/Dockerfile.web:ro
+    stdin_open: true
+    tty: true 

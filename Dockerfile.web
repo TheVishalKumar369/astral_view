@@ -1,0 +1,40 @@
+# Dockerfile.web: Web Portal (React + Three.js)
+FROM node:18
+
+# Set working directory
+WORKDIR /app
+
+# Copy package.json and install dependencies
+COPY web_portal/package.json ./
+# COPY web_portal/package-lock.json ./
+RUN npm install
+
+# Copy web portal source code (will be overridden by volume mount if present)
+COPY web_portal/ ./
+
+# Expose port for development server
+EXPOSE 3000
+
+# Create a startup script that handles volume-mounted files
+RUN echo '#!/bin/bash\n\
+# Handle volume-mounted files\n\
+if [ -f /app/web_portal/package.json ]; then\n\
+    echo "Using volume-mounted web portal"\n\
+    # Update web portal directory with volume-mounted version\n\
+    rm -rf /app/web_portal_backup\n\
+    mv /app/web_portal /app/web_portal_backup\n\
+    ln -sf /app/web_portal_backup /app/web_portal\n\
+    \n\
+    # Reinstall dependencies if package.json changed\n\
+    if [ -f /app/package.json ]; then\n\
+        echo "Reinstalling npm dependencies"\n\
+        npm install\n\
+    fi\n\
+fi\n\
+\n\
+# Execute the original entrypoint\n\
+exec npm start "$@"' > /app/start.sh && \
+    chmod +x /app/start.sh
+
+# Entrypoint for React app
+CMD ["/app/start.sh"] 

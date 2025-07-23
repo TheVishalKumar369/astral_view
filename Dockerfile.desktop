@@ -1,0 +1,74 @@
+# Dockerfile.desktop: Desktop Visualization (Ursina/OpenGL, GPU-ready)
+FROM nvidia/opengl:1.2-glvnd-runtime-ubuntu22.04
+
+# System dependencies
+RUN apt-get update && apt-get install -y \
+    python3.10 python3.10-venv python3.10-dev python3-pip \
+    build-essential git wget curl libgl1-mesa-glx libx11-6 && \
+    rm -rf /var/lib/apt/lists/*
+
+# Set python3.10 as default
+RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.10 1
+
+# Create working directory
+WORKDIR /workspace
+
+# Copy requirements and install Python dependencies
+COPY requirements.txt ./
+RUN python3 -m pip install --upgrade pip && \
+    python3 -m pip install -r requirements.txt
+
+# Copy desktop app code (will be overridden by volume mount if present)
+COPY desktop_app/ ./desktop_app/
+
+# Mount data volume
+VOLUME ["/workspace/data"]
+
+# Create a startup script that handles volume-mounted files
+RUN echo '#!/bin/bash\n\
+# Handle volume-mounted files\n\
+echo "🔧 Checking for volume-mounted files..."\n\
+\n\
+# Handle desktop_app directory\n\
+if [ -f /workspace/desktop_app/cosmic_explorer.py ]; then\n\
+    echo "🖥️ Using volume-mounted desktop app"\n\
+    # Ensure desktop_app is accessible\n\
+    if [ ! -L /workspace/desktop_app ]; then\n\
+        rm -rf /workspace/desktop_app_backup\n\
+        mv /workspace/desktop_app /workspace/desktop_app_backup\n\
+        ln -sf /workspace/desktop_app_backup /workspace/desktop_app\n\
+    fi\n\
+fi\n\
+\n\
+# Handle scripts directory\n\
+if [ -f /workspace/scripts/collect_data.py ]; then\n\
+    echo "📁 Using volume-mounted scripts"\n\
+    if [ ! -L /workspace/scripts ]; then\n\
+        rm -rf /workspace/scripts_backup\n\
+        mv /workspace/scripts /workspace/scripts_backup\n\
+        ln -sf /workspace/scripts_backup /workspace/scripts\n\
+    fi\n\
+fi\n\
+\n\
+# Handle requirements.txt\n\
+if [ -f /workspace/requirements.txt ]; then\n\
+    echo "📦 Using volume-mounted requirements.txt"\n\
+    # Check if requirements changed by comparing timestamps\n\
+    if [ ! -f /workspace/.requirements_installed ] || [ /workspace/requirements.txt -nt /workspace/.requirements_installed ]; then\n\
+        echo "🔄 Installing/updating Python dependencies..."\n\
+        pip install -r /workspace/requirements.txt\n\
+        touch /workspace/.requirements_installed\n\
+    fi\n\
+fi\n\
+\n\
+# Set Python path to include all mounted directories\n\
+export PYTHONPATH="/workspace:/workspace/desktop_app:/workspace/scripts:$PYTHONPATH"\n\
+\n\
+echo "✅ Volume mounts configured. Starting desktop app..."\n\
+\n\
+# Execute the original entrypoint\n\
+exec python3 -u desktop_app/cosmic_explorer.py "$@"' > /workspace/start.sh && \
+    chmod +x /workspace/start.sh
+
+# Entrypoint for desktop app
+ENTRYPOINT ["/workspace/start.sh"] 
