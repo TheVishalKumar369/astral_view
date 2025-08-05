@@ -1,30 +1,30 @@
-# Docker Volume Setup for Cosmic Explorer
+# Podman Volume Setup for Cosmic Explorer
 
-This setup allows you to modify **Python files**, configuration files, and code without rebuilding Docker containers.
+This setup allows you to modify **Python files**, configuration files, and code without rebuilding Podman containers.
 
 ## 🚀 Quick Start
 
 ### Running Services (No Rebuild Required)
 ```bash
 # Run data collection
-docker compose run --rm data_service
+podman-compose run --rm data_service
 
 # Run desktop app
-docker compose run --rm desktop_app
+podman-compose run --rm desktop_app
 
 # Run web portal
-docker compose up web_portal
+podman-compose up web_portal
 ```
 
 ### Rebuilding When Needed
 ```bash
 # Rebuild all services
-.\rebuild.ps1
+.\rebuild-podman.ps1
 
 # Rebuild specific service
-.\rebuild.ps1 data_service
-.\rebuild.ps1 desktop_app
-.\rebuild.ps1 web_portal
+.\rebuild-podman.ps1 data_service
+.\rebuild-podman.ps1 desktop_app
+.\rebuild-podman.ps1 web_portal
 ```
 
 ## 📁 Volume Mounts
@@ -35,21 +35,21 @@ The following files/directories are mounted as volumes:
 - `./scripts/` → `/workspace/scripts/` (read-only) **← Python files here**
 - `./desktop_app/` → `/workspace/desktop_app/` (read-only) **← Python files here**
 - `./requirements.txt` → `/workspace/requirements.txt/` (read-only)
-- `./docker-compose.yml` → `/workspace/docker-compose.yml/` (read-only)
-- `./Dockerfile.data` → `/workspace/Dockerfile.data/` (read-only)
+- `./podman-compose.yml` → `/workspace/podman-compose.yml/` (read-only)
+- `./Containerfile.data` → `/workspace/Containerfile.data/` (read-only)
 
 ### Desktop App (`desktop_app`)
 - `./desktop_app/` → `/workspace/desktop_app/` (read-only) **← Python files here**
 - `./scripts/` → `/workspace/scripts/` (read-only) **← Python files here**
 - `./requirements.txt` → `/workspace/requirements.txt/` (read-only)
-- `./docker-compose.yml` → `/workspace/docker-compose.yml/` (read-only)
-- `./Dockerfile.desktop` → `/workspace/Dockerfile.desktop/` (read-only)
+- `./podman-compose.yml` → `/workspace/podman-compose.yml/` (read-only)
+- `./Containerfile.desktop` → `/workspace/Containerfile.desktop/` (read-only)
 
 ### Web Portal (`web_portal`)
 - `./web_portal/` → `/app/web_portal/` (read-only)
 - `./package.json` → `/app/package.json/` (read-only)
-- `./docker-compose.yml` → `/app/docker-compose.yml/` (read-only)
-- `./Dockerfile.web` → `/app/Dockerfile.web/` (read-only)
+- `./podman-compose.yml` → `/app/podman-compose.yml/` (read-only)
+- `./Containerfile.web` → `/app/Containerfile.web/` (read-only)
 
 ## 🔧 What You Can Modify Without Rebuilding
 
@@ -59,10 +59,10 @@ The following files/directories are mounted as volumes:
 - **Python Requirements**: `requirements.txt` (automatically reinstalled)
 - **Web Portal**: `web_portal/src/`, `web_portal/public/`
 - **Package.json**: `web_portal/package.json` (automatically reinstalled)
-- **Docker Compose**: `docker-compose.yml`
+- **Podman Compose**: `podman-compose.yml`
 
 ### 🔄 Rebuild Required
-- **Dockerfiles**: `Dockerfile.data`, `Dockerfile.desktop`, `Dockerfile.web`
+- **Containerfiles**: `Containerfile.data`, `Containerfile.desktop`, `Containerfile.web`
 - **Base Images**: Changes to FROM statements
 - **System Dependencies**: apt-get install commands
 - **Build Process**: Changes to RUN commands
@@ -78,14 +78,14 @@ code desktop_app/cosmic_explorer.py
 code scripts/process_data.py
 
 # Run immediately - changes are live!
-docker compose run --rm data_service
-docker compose run --rm desktop_app
+podman-compose run --rm data_service
+podman-compose run --rm desktop_app
 ```
 
 ### Test Python Changes
 ```bash
 # Test the volume mount functionality
-docker compose run --rm data_service python3 test_python_changes.py
+podman-compose run --rm data_service python3 test_python_changes.py
 ```
 
 ## 🛠️ Development Workflow
@@ -101,14 +101,14 @@ code scripts/process_data.py
 ### 2. Run Without Rebuild
 ```bash
 # Test Python changes immediately
-docker compose run --rm data_service
-docker compose run --rm desktop_app
+podman-compose run --rm data_service
+podman-compose run --rm desktop_app
 ```
 
 ### 3. Rebuild Only When Necessary
 ```bash
-# Only rebuild if you changed Dockerfiles or system dependencies
-.\rebuild.ps1 data_service
+# Only rebuild if you changed Containerfiles or system dependencies
+.\rebuild-podman.ps1 data_service
 ```
 
 ## 🔍 Troubleshooting
@@ -116,9 +116,10 @@ docker compose run --rm desktop_app
 ### Python Changes Not Reflected
 If your Python changes aren't reflected:
 1. **Check volume mounts**: Ensure the file is in the correct mounted directory
-2. **Restart container**: `docker compose run --rm [service_name]`
+2. **Restart container**: `podman-compose run --rm [service_name]`
 3. **Check Python path**: The container automatically sets `PYTHONPATH` to include mounted directories
 4. **Verify file permissions**: Ensure the file is readable
+5. **SELinux context**: On SELinux systems, use `:Z` flag for volume mounts
 
 ### Dependencies Not Updated
 For Python dependencies:
@@ -127,10 +128,17 @@ For Python dependencies:
 - Dependencies are cached - only reinstalled when `requirements.txt` changes
 
 ### Permission Issues
-On Windows, ensure Docker has access to your project directory:
-1. Open Docker Desktop
-2. Go to Settings → Resources → File Sharing
-3. Add your project directory to the shared paths
+On Windows, ensure Podman has access to your project directory:
+1. Use Windows-style paths with Podman Desktop
+2. Ensure your user has access to the project directory
+3. Consider using `podman unshare` for rootless containers
+
+### SELinux Issues (Linux)
+If you encounter SELinux permission issues:
+```bash
+# Use :Z flag for proper SELinux labeling
+podman run -v ./data:/workspace/data:Z your_image
+```
 
 ## 📝 Examples
 
@@ -140,7 +148,7 @@ On Windows, ensure Docker has access to your project directory:
 code scripts/collect_data.py
 
 # Run immediately (no rebuild needed)
-docker compose run --rm data_service
+podman-compose run --rm data_service
 ```
 
 ### Modifying Python Desktop App
@@ -149,7 +157,7 @@ docker compose run --rm data_service
 code desktop_app/cosmic_explorer.py
 
 # Run immediately (no rebuild needed)
-docker compose run --rm desktop_app
+podman-compose run --rm desktop_app
 ```
 
 ### Adding New Python Dependencies
@@ -158,7 +166,7 @@ docker compose run --rm desktop_app
 echo "new-package==1.0.0" >> requirements.txt
 
 # Run immediately (dependencies auto-installed)
-docker compose run --rm data_service
+podman-compose run --rm data_service
 ```
 
 ### Testing Python Changes
@@ -167,7 +175,7 @@ docker compose run --rm data_service
 echo 'print("Hello from mounted Python file!")' > test.py
 
 # Run it in the container
-docker compose run --rm data_service python3 test.py
+podman-compose run --rm data_service python3 test.py
 ```
 
 ## 🎯 Benefits
@@ -177,4 +185,6 @@ docker compose run --rm data_service python3 test.py
 3. **Live Development**: See Python changes in real-time
 4. **Automatic Dependencies**: Python requirements auto-install on changes
 5. **Selective Rebuilding**: Only rebuild when absolutely necessary
-6. **Full Python Support**: All Python files, modules, and packages work seamlessly 
+6. **Full Python Support**: All Python files, modules, and packages work seamlessly
+7. **Lower Resource Usage**: Podman's rootless approach uses fewer system resources
+8. **Better Security**: Rootless containers provide better isolation and security

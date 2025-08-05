@@ -9,8 +9,8 @@ import numpy as np
 import pyarrow.parquet as pq
 import h5py
 
-RAW_DATA_DIR = Path("/workspace/data/raw")
-PROCESSED_DATA_DIR = Path("/workspace/data/processed")
+RAW_DATA_DIR = Path("data/raw")
+PROCESSED_DATA_DIR = Path("data/processed")
 PROCESSED_DATA_DIR.mkdir(parents=True, exist_ok=True)
 
 # --- Existing functions for loading and cleaning ---

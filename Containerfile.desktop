@@ -1,11 +1,17 @@
-# Dockerfile.desktop: Desktop Visualization (Ursina/OpenGL, GPU-ready)
-FROM nvidia/opengl:1.2-glvnd-runtime-ubuntu22.04
+# Containerfile.desktop: Desktop Visualization (Ursina/OpenGL, GPU-ready)
+FROM nvidia/opengl:1.2-glvnd-devel-ubuntu22.04
 
-# System dependencies
+# System dependencies including enhanced GPU and display support
 RUN apt-get update && apt-get install -y \
     python3.10 python3.10-venv python3.10-dev python3-pip \
-    build-essential git wget curl libgl1-mesa-glx libx11-6 && \
-    rm -rf /var/lib/apt/lists/*
+    build-essential git wget curl \
+    libgl1-mesa-glx libgl1-mesa-dri libglx-mesa0 \
+    libx11-6 libxext6 libxrender1 libxtst6 libxi6 \
+    xvfb x11-utils x11-xserver-utils xauth \
+    mesa-utils glmark2 \
+    nvidia-utils-525 \
+    htop nvtop \
+    && rm -rf /var/lib/apt/lists/*
 
 # Set python3.10 as default
 RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.10 1
@@ -71,4 +77,4 @@ exec python3 -u desktop_app/cosmic_explorer.py "$@"' > /workspace/start.sh && \
     chmod +x /workspace/start.sh
 
 # Entrypoint for desktop app
-ENTRYPOINT ["/workspace/start.sh"] 
+ENTRYPOINT ["/workspace/start.sh"]

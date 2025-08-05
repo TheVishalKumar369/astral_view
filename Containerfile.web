@@ -1,4 +1,4 @@
-# Dockerfile.web: Web Portal (React + Three.js)
+# Containerfile.web: Web Portal (React + Three.js)
 FROM node:18
 
 # Set working directory
@@ -33,8 +33,8 @@ if [ -f /app/web_portal/package.json ]; then\n\
 fi\n\
 \n\
 # Execute the original entrypoint\n\
-exec npm start "$@"' > /app/start.sh && \
+exec npm start "$@"'  /app/start.sh && \
     chmod +x /app/start.sh
 
 # Entrypoint for React app
-CMD ["/app/start.sh"] 
+CMD ["/app/start.sh"]

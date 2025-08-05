@@ -1,0 +1,75 @@
+services:
+  data_service:
+    build:
+      context: .
+      dockerfile: Containerfile.data
+    image: cosmic_explorer_data
+    volumes:
+      - ./data:/workspace/data:Z
+      - ./scripts:/workspace/scripts:ro,Z
+      - ./requirements.txt:/workspace/requirements.txt:ro,Z
+      - ./podman-compose.yml:/workspace/podman-compose.yml:ro,Z
+      - ./Containerfile.data:/workspace/Containerfile.data:ro,Z
+      - ./desktop_app:/workspace/desktop_app:ro,Z
+    # GPU support for Windows/WSL2
+    security_opt:
+      - label=disable
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility,graphics
+      - DISPLAY=${DISPLAY:-:0}
+      - PYTHONUNBUFFERED=1
+      - MPLBACKEND=Agg
+      - PYTHONPATH=/workspace
+      - CUDA_VISIBLE_DEVICES=0
+    stdin_open: true
+    tty: true
+    # For GPU access on Windows
+    privileged: false
+    # Enable GPU support
+    runtime: nvidia
+
+  desktop_app:
+    build:
+      context: .
+      dockerfile: Containerfile.desktop
+    image: cosmic_explorer_desktop
+    volumes:
+      - ./data:/workspace/data:Z
+      - ./desktop_app:/workspace/desktop_app:ro,Z
+      - ./scripts:/workspace/scripts:ro,Z
+      - ./requirements.txt:/workspace/requirements.txt:ro,Z
+      - ./podman-compose.yml:/workspace/podman-compose.yml:ro,Z
+      - ./Containerfile.desktop:/workspace/Containerfile.desktop:ro,Z
+    # GPU and display support
+    security_opt:
+      - label=disable
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility,graphics,display
+      - DISPLAY=${DISPLAY:-:0}
+      - PYTHONPATH=/workspace
+      - CUDA_VISIBLE_DEVICES=0
+      - LIBGL_ALWAYS_INDIRECT=1
+      - QT_X11_NO_MITSHM=1
+    stdin_open: true
+    tty: true
+    # Enable GPU support
+    runtime: nvidia
+    # For GUI applications
+    network_mode: host
+
+  web_portal:
+    build:
+      context: .
+      dockerfile: Containerfile.web
+    image: cosmic_explorer_web
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./data/processed:/app/public/data:ro,Z
+      - ./web_portal:/app/web_portal:ro,Z
+      - ./podman-compose.yml:/app/podman-compose.yml:ro,Z
+      - ./Containerfile.web:/app/Containerfile.web:ro,Z
+    stdin_open: true
+    tty: true

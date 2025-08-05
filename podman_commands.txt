@@ -1,0 +1,93 @@
+# Podman Commands for Cosmic Explorer Project
+
+# 1. Build all Podman images
+
+podman-compose build
+
+# 2. Start all services (data, desktop app, web portal)
+# (Note: Only data collection runs automatically by default)
+
+podman-compose up
+
+# 3. Run data collection only (fills data/raw/)
+
+podman-compose run --rm data_service python scripts/collect_data.py
+
+# 4. Run data processing (clean/enrich data, saves to data/processed/)
+
+podman-compose run --rm data_service python scripts/process_data.py
+
+# 5. Run data integration (merge all data for 3D world/app)
+
+podman-compose run --rm data_service python scripts/integrate_cosmic_data.py
+
+# 6. Run the desktop app (if available)
+
+podman-compose run --rm desktop_app python desktop_app/cosmic_explorer.py
+
+# 7. Start the web portal (React app)
+
+podman-compose up web_portal
+
+# 8. Stop all running containers
+
+podman-compose down
+
+# 9. View logs for a specific service (e.g., data_service)
+
+podman-compose logs data_service
+
+# 10. (Optional) Run all data steps in one go (edit run_data_collection.sh or use this command)
+# (Uncomment and use if you want to automate all steps)
+# podman-compose run --rm data_service bash -c "python scripts/collect_data.py && python scripts/process_data.py && python scripts/integrate_cosmic_data.py"
+
+# Additional Podman-specific commands:
+
+# 11. Build individual services
+podman build -f Containerfile.data -t cosmic_explorer_data .
+podman build -f Containerfile.desktop -t cosmic_explorer_desktop .
+podman build -f Containerfile.web -t cosmic_explorer_web .
+
+# 12. Run services directly with Podman (without compose)
+podman run --rm -v ./data:/workspace/data:Z cosmic_explorer_data
+podman run --rm -v ./data:/workspace/data:Z -e DISPLAY=$DISPLAY cosmic_explorer_desktop
+podman run --rm -p 3000:3000 cosmic_explorer_web
+
+# 13. List Podman images
+podman images
+
+# 14. List running containers
+podman ps
+
+# 15. Clean up unused images and containers
+podman system prune -a
+
+# GPU-specific commands:
+
+# 16. Test GPU access in containers
+podman run --rm --gpus all cosmic_explorer_data nvidia-smi
+podman run --rm --gpus all cosmic_explorer_data python3 -c "import torch; print('CUDA available:', torch.cuda.is_available())"
+
+# 17. Monitor GPU usage while containers are running
+nvidia-smi -l 1  # Update every second
+nvtop  # Interactive GPU monitoring
+
+# 18. Run containers with specific GPU device
+podman run --rm --device nvidia.com/gpu=0 cosmic_explorer_data
+podman run --rm --device nvidia.com/gpu=all cosmic_explorer_data
+
+# 19. Run with GPU and display forwarding (Windows/WSL2)
+podman run --rm --gpus all -e DISPLAY=$DISPLAY cosmic_explorer_desktop
+
+# 20. Check GPU access inside running container
+podman exec -it <container_name> nvidia-smi
+podman exec -it <container_name> python3 -c "import torch; print(torch.cuda.is_available())"
+
+# 21. Build containers with GPU support flags
+podman build --build-arg CUDA_VERSION=12.2 -f Containerfile.data -t cosmic_explorer_data .
+
+# 22. Run containers with increased memory for GPU tasks
+podman run --rm --memory=8g --gpus all cosmic_explorer_data
+
+# 23. Run with CDI (Container Device Interface) for GPU
+podman run --rm --device nvidia.com/gpu=all --security-opt label=disable cosmic_explorer_data
