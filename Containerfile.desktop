@@ -9,9 +9,11 @@ RUN apt-get update && apt-get install -y \
     libx11-6 libxext6 libxrender1 libxtst6 libxi6 \
     xvfb x11-utils x11-xserver-utils xauth \
     mesa-utils glmark2 \
-    nvidia-utils-525 \
-    htop nvtop \
+    htop \
     && rm -rf /var/lib/apt/lists/*
+
+# Install GPU monitoring tools separately if needed  
+# RUN apt-get update && apt-get install -y nvtop && rm -rf /var/lib/apt/lists/* || true
 
 # Set python3.10 as default
 RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.10 1
@@ -38,23 +40,14 @@ echo "🔧 Checking for volume-mounted files..."\n\
 # Handle desktop_app directory\n\
 if [ -f /workspace/desktop_app/cosmic_explorer.py ]; then\n\
     echo "🖥️ Using volume-mounted desktop app"\n\
-    # Ensure desktop_app is accessible\n\
-    if [ ! -L /workspace/desktop_app ]; then\n\
-        rm -rf /workspace/desktop_app_backup\n\
-        mv /workspace/desktop_app /workspace/desktop_app_backup\n\
-        ln -sf /workspace/desktop_app_backup /workspace/desktop_app\n\
-    fi\n\
+    # Use volume-mounted desktop_app directly\n\
+    echo \"Volume-mounted desktop app detected\"\n\\
 fi\n\
 \n\
 # Handle scripts directory\n\
 if [ -f /workspace/scripts/collect_data.py ]; then\n\
-    echo "📁 Using volume-mounted scripts"\n\
-    if [ ! -L /workspace/scripts ]; then\n\
-        rm -rf /workspace/scripts_backup\n\
-        mv /workspace/scripts /workspace/scripts_backup\n\
-        ln -sf /workspace/scripts_backup /workspace/scripts\n\
-    fi\n\
-fi\n\
+    echo \"📁 Using volume-mounted scripts\"\n\
+fi\n\\
 \n\
 # Handle requirements.txt\n\
 if [ -f /workspace/requirements.txt ]; then\n\

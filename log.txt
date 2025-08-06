@@ -1,0 +1,48 @@
+"--- Data Collection Summary ---
+>> Exoplanets: Success
+>> Gaia: Success
+>> SIMBAD: Success
+>> JPL Horizons: Success
+>> Messier: Success
+>> All data collection steps attempted.
+>> ERROR: Failed to clean exoplanet data: ['ra', 'dec', 'pl_orbper', 'pl_rade', 'pl_bmasse']
+>> Skipping save due to missing cleaned data.
+>> Skipping extraction due to missing cleaned data.
+>> ERROR: Gaia host stars: ['ra', 'dec', 'parallax']
+>> ERROR: Messier catalog: ['ra', 'dec', 'distance_ly']
+>> ERROR: Solar System: ['x_ly', 'y_ly', 'z_ly']
+>> 
+>> --- Data Processing Summary ---
+>> Load Exoplanets: Success
+>> Clean Data: Failed: ['ra', 'dec', 'pl_orbper', 'pl_rade', 'pl_bmasse']
+>> Save Cleaned Data: Skipped
+>> Extract Explorable Planets: Skipped
+>> Gaia Host Stars: Failed: ['ra', 'dec', 'parallax']
+>> Messier Catalog: Failed: ['ra', 'dec', 'distance_ly']
+>> Solar System: Failed: ['x_ly', 'y_ly', 'z_ly']
+>> All data processing steps attempted.
+>> ?? Cosmic Data Integration
+>> ==================================================
+>> ? Cleaned exoplanets data not found
+>> ? Cleaned Gaia stars data not found
+>> √ Loaded 1000 SIMBAD names
+>>   Example: Gaia 44062348664673152 -> LAMOST J034314.22+163804.3
+>>   Example: Gaia 47908509057301120 -> EPIC 210731500.01
+>>   Example: Gaia 49842515651843200 -> LAMOST J035304.59+175425.4
+>> ? Cleaned Solar System data not found
+>> ? Cleaned Messier catalog not found
+>> 
+>> ?? Creating unified cosmic world...
+>> 
+>> ?? Saving cosmic world...
+>>   Saved: /tmp/data/processed/cosmic_world.json
+>> 
+>> ?? Cosmic World Creation Complete!
+>> ==================================================
+>> Total objects: 0
+>> Traceback (most recent call last):
+>>   File "/workspace/scripts/integrate_cosmic_data.py", line 463, in <module>
+>>     main() 
+>>   File "/workspace/scripts/integrate_cosmic_data.py", line 447, in main
+>>     if cosmic_world['stars']['catalog']:
+>> KeyError: 'c

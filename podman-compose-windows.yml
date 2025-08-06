@@ -8,25 +8,13 @@ services:
       - ./data:/workspace/data
       - ./scripts:/workspace/scripts:ro
       - ./requirements.txt:/workspace/requirements.txt:ro
-      - ./podman-compose.yml:/workspace/podman-compose.yml:ro
-      - ./Containerfile.data:/workspace/Containerfile.data:ro
       - ./desktop_app:/workspace/desktop_app:ro
-    # GPU support for Windows/WSL2
-    security_opt:
-      - label=disable
     environment:
-      - NVIDIA_VISIBLE_DEVICES=all
-      - NVIDIA_DRIVER_CAPABILITIES=compute,utility,graphics
-      - DISPLAY=${DISPLAY:-:0}
       - PYTHONUNBUFFERED=1
       - MPLBACKEND=Agg
       - PYTHONPATH=/workspace
-      - CUDA_VISIBLE_DEVICES=0
     stdin_open: true
     tty: true
-    # For GPU access on Windows
-    privileged: false
-    # Note: GPU support requires additional configuration on Windows
 
   desktop_app:
     build:
@@ -38,24 +26,13 @@ services:
       - ./desktop_app:/workspace/desktop_app:ro
       - ./scripts:/workspace/scripts:ro
       - ./requirements.txt:/workspace/requirements.txt:ro
-      - ./podman-compose.yml:/workspace/podman-compose.yml:ro
-      - ./Containerfile.desktop:/workspace/Containerfile.desktop:ro
-    # GPU and display support
-    security_opt:
-      - label=disable
     environment:
-      - NVIDIA_VISIBLE_DEVICES=all
-      - NVIDIA_DRIVER_CAPABILITIES=compute,utility,graphics,display
-      - DISPLAY=${DISPLAY:-:0}
       - PYTHONPATH=/workspace
-      - CUDA_VISIBLE_DEVICES=0
       - LIBGL_ALWAYS_INDIRECT=1
-      - QT_X11_NO_MITSHM=1
     stdin_open: true
     tty: true
-    # Note: GPU support requires additional configuration on Windows
-    # For GUI applications (Windows compatibility)
-    # network_mode: host  # Commented out for Windows compatibility
+    ports:
+      - "5900:5900"  # VNC port for GUI access
 
   web_portal:
     build:
@@ -67,7 +44,5 @@ services:
     volumes:
       - ./data/processed:/app/public/data:ro
       - ./web_portal:/app/web_portal:ro
-      - ./podman-compose.yml:/app/podman-compose.yml:ro
-      - ./Containerfile.web:/app/Containerfile.web:ro
     stdin_open: true
     tty: true

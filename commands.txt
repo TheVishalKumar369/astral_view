@@ -1,0 +1,284 @@
+# Podman Commands for Exoplanet Cosmos Traveller Project
+# ==================================================
+
+## 1. BASIC PODMAN OPERATIONS
+
+# Check Podman version and status
+podman --version
+# Shows the installed Podman version
+
+podman info
+# Displays system information and Podman configuration
+
+podman system info
+# More detailed system and storage information
+
+
+## 2. CONTAINER LIFECYCLE MANAGEMENT
+
+# Build container image from Dockerfile
+podman build -t exoplanet-cosmos:latest .
+# Builds image with tag "exoplanet-cosmos:latest" from current directory
+
+podman build -t exoplanet-cosmos:dev -f Dockerfile.dev .
+# Build using a specific Dockerfile (if you have multiple)
+
+# List all images
+podman images
+# Shows all locally available container images
+
+# Run container interactively
+podman run -it --rm exoplanet-cosmos:latest /bin/bash
+# -it: interactive terminal, --rm: remove container after exit
+
+# Run container with volume mount (for data persistence)
+podman run -it --rm -v ${PWD}:/workspace exoplanet-cosmos:latest
+# Mounts current directory to /workspace inside container
+
+# Run container with specific working directory
+podman run -it --rm -v ${PWD}:/workspace -w /workspace exoplanet-cosmos:latest
+# -w: sets working directory inside container
+
+# Run container with environment variables
+podman run -it --rm -e PYTHONPATH=/workspace -v ${PWD}:/workspace exoplanet-cosmos:latest
+# -e: sets environment variable
+
+
+## 3. DEVELOPMENT & DEBUGGING
+
+# Run container and execute specific script
+podman run --rm -v ${PWD}:/workspace -w /workspace exoplanet-cosmos:latest python scripts/collect_data.py
+# Runs the data collection script
+
+podman run --rm -v ${PWD}:/workspace -w /workspace exoplanet-cosmos:latest python scripts/process_data.py
+# Runs the data processing script
+
+podman run --rm -v ${PWD}:/workspace -w /workspace exoplanet-cosmos:latest python scripts/integrate_cosmic_data.py
+# Runs the data integration script
+
+# Run Jupyter notebook server
+podman run -p 8888:8888 --rm -v ${PWD}:/workspace -w /workspace exoplanet-cosmos:latest jupyter notebook --ip=0.0.0.0 --no-browser --allow-root
+# -p: port mapping (host:container)
+
+# Run with GPU support (if available)
+podman run --device nvidia.com/gpu=all -v ${PWD}:/workspace exoplanet-cosmos:latest
+# Enables GPU access inside container
+
+
+## 4. CONTAINER MANAGEMENT
+
+# List running containers
+podman ps
+# Shows currently running containers
+
+# List all containers (including stopped)
+podman ps -a
+# Shows all containers regardless of status
+
+# Stop a running container
+podman stop <container_id>
+# Gracefully stops a container
+
+# Remove a container
+podman rm <container_id>
+# Removes a stopped container
+
+# Remove all stopped containers
+podman container prune
+# Cleans up stopped containers
+
+# Execute command in running container
+podman exec -it <container_id> /bin/bash
+# Opens shell in running container
+
+
+## 5. IMAGE MANAGEMENT
+
+# Remove an image
+podman rmi exoplanet-cosmos:latest
+# Removes the specified image
+
+# Remove unused images
+podman image prune
+# Removes dangling images
+
+# Remove all unused images
+podman image prune -a
+# Removes all images not used by containers
+
+# Tag an image
+podman tag exoplanet-cosmos:latest exoplanet-cosmos:v1.0
+# Creates a new tag for existing image
+
+# Save image to tar file
+podman save -o exoplanet-cosmos.tar exoplanet-cosmos:latest
+# Exports image to tar file
+
+# Load image from tar file
+podman load -i exoplanet-cosmos.tar
+# Imports image from tar file
+
+
+## 6. DATA MANAGEMENT & VOLUMES
+
+# Create a named volume for persistent data
+podman volume create cosmos-data
+# Creates a named volume for data persistence
+
+# Run with named volume
+podman run -v cosmos-data:/workspace/data exoplanet-cosmos:latest
+# Mounts named volume to container
+
+# List volumes
+podman volume ls
+# Shows all volumes
+
+# Remove a volume
+podman volume rm cosmos-data
+# Removes specified volume
+
+# Remove all unused volumes
+podman volume prune
+# Removes unused volumes
+
+
+## 7. NETWORKING
+
+# Run container with specific port mapping
+podman run -p 8080:80 -p 8888:8888 exoplanet-cosmos:latest
+# Maps multiple ports (host:container)
+
+# Run with custom network
+podman network create cosmos-net
+podman run --network cosmos-net exoplanet-cosmos:latest
+# Creates and uses custom network
+
+
+## 8. MULTI-STAGE & PRODUCTION COMMANDS
+
+# Build production image
+podman build -t exoplanet-cosmos:prod --target production .
+# Builds specific stage from multi-stage Dockerfile
+
+# Run production container
+podman run -d --name cosmos-app -p 80:80 -v cosmos-data:/app/data exoplanet-cosmos:prod
+# -d: detached mode, --name: assigns name
+
+# View container logs
+podman logs cosmos-app
+# Shows container logs
+
+# Follow logs in real-time
+podman logs -f cosmos-app
+# -f: follows logs continuously
+
+
+## 9. SYSTEM MAINTENANCE
+
+# Clean up everything (use with caution!)
+podman system prune -a
+# Removes stopped containers, unused networks, images, and build cache
+
+# Check disk usage
+podman system df
+# Shows disk usage by images, containers, and volumes
+
+# Reset Podman (removes everything)
+podman system reset
+# WARNING: This removes all containers, images, volumes, and networks
+
+
+## 10. COMMON DEVELOPMENT WORKFLOWS
+
+# Full development setup
+podman build -t exoplanet-cosmos:dev .
+podman run -it --rm -v ${PWD}:/workspace -w /workspace -p 8888:8888 exoplanet-cosmos:dev
+
+# Run data pipeline
+podman run --rm -v ${PWD}:/workspace -w /workspace exoplanet-cosmos:latest python scripts/collect_data.py
+podman run --rm -v ${PWD}:/workspace -w /workspace exoplanet-cosmos:latest python scripts/process_data.py
+podman run --rm -v ${PWD}:/workspace -w /workspace exoplanet-cosmos:latest python scripts/integrate_cosmic_data.py
+
+# Quick test run
+podman run --rm -v ${PWD}:/workspace -w /workspace exoplanet-cosmos:latest python -m pytest tests/
+
+# Interactive development session
+podman run -it --rm -v ${PWD}:/workspace -w /workspace -e PYTHONPATH=/workspace exoplanet-cosmos:latest /bin/bash
+
+
+## 11. TROUBLESHOOTING COMMANDS
+
+# Inspect container configuration
+podman inspect <container_id>
+# Shows detailed container information
+
+# Check container resource usage
+podman stats
+# Shows real-time resource usage
+
+# View container filesystem changes
+podman diff <container_id>
+# Shows what files changed in container
+
+# Debug container startup issues
+podman run --rm -v ${PWD}:/workspace exoplanet-cosmos:latest python -c "import sys; print(sys.path)"
+# Tests Python path configuration
+
+
+## 12. WINDOWS-SPECIFIC NOTES
+
+# On Windows PowerShell, use ${PWD} for current directory
+# On Windows CMD, use %CD% instead of ${PWD}
+
+# Windows volume mounting examples:
+podman run -v ${PWD}:/workspace exoplanet-cosmos:latest    # PowerShell
+podman run -v %CD%:/workspace exoplanet-cosmos:latest     # CMD
+
+# For WSL2 backend, paths should work normally
+# For Hyper-V backend, ensure drive sharing is enabled
+
+
+## 13. USEFUL ALIASES (add to PowerShell profile)
+
+# Add these to your PowerShell profile for convenience:
+# Set-Alias -Name prun -Value 'podman run --rm -v ${PWD}:/workspace -w /workspace exoplanet-cosmos:latest'
+# Set-Alias -Name pdev -Value 'podman run -it --rm -v ${PWD}:/workspace -w /workspace exoplanet-cosmos:latest /bin/bash'
+
+# Then use:
+# prun python scripts/collect_data.py
+# pdev  # for interactive development
+
+
+## 14. EXAMPLE COMPLETE WORKFLOW
+
+# 1. Build the image
+podman build -t exoplanet-cosmos:latest .
+
+# 2. Create persistent volume
+podman volume create cosmos-data
+
+# 3. Run data collection
+podman run --rm -v ${PWD}:/workspace -v cosmos-data:/workspace/data -w /workspace exoplanet-cosmos:latest python scripts/collect_data.py
+
+# 4. Process the data
+podman run --rm -v ${PWD}:/workspace -v cosmos-data:/workspace/data -w /workspace exoplanet-cosmos:latest python scripts/process_data.py
+
+# 5. Integrate cosmic data
+podman run --rm -v ${PWD}:/workspace -v cosmos-data:/workspace/data -w /workspace exoplanet-cosmos:latest python scripts/integrate_cosmic_data.py
+
+# 6. Start Jupyter for analysis
+podman run -p 8888:8888 --rm -v ${PWD}:/workspace -v cosmos-data:/workspace/data -w /workspace exoplanet-cosmos:latest jupyter notebook --ip=0.0.0.0 --no-browser --allow-root
+
+# 7. Cleanup when done
+podman volume rm cosmos-data
+podman rmi exoplanet-cosmos:latest
+
+
+## NOTES:
+# - Always use --rm flag for one-time runs to avoid container buildup
+# - Use named volumes for data that needs to persist between runs
+# - Mount your project directory to /workspace for easy development
+# - Set PYTHONPATH environment variable if needed for imports
+# - Use -it flags for interactive sessions
+# - Use -d flag for background/daemon processes
+# - Check logs with 'podman logs' if something isn't working

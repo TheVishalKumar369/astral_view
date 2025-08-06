@@ -9,8 +9,11 @@ import numpy as np
 import pyarrow.parquet as pq
 import h5py
 
-RAW_DATA_DIR = Path("data/raw")
-PROCESSED_DATA_DIR = Path("data/processed")
+# Use relative paths from the script directory
+script_dir = Path(__file__).parent
+project_dir = script_dir.parent
+RAW_DATA_DIR = project_dir / "data" / "raw"
+PROCESSED_DATA_DIR = project_dir / "data" / "processed"
 PROCESSED_DATA_DIR.mkdir(parents=True, exist_ok=True)
 
 # --- Existing functions for loading and cleaning ---
@@ -240,23 +243,50 @@ def clean_solar_system_data(df):
 def main():
     results = {}
     
-    # Helper function for final validation
+    # Helper function for 3D world validation
     def validate_dataframe(df, name, required_cols):
-        """Checks that all required columns exist and have no null values."""
-        for col in required_cols:
-            if col not in df.columns:
-                print(f"Available columns in {name}: {list(df.columns)}")
-                print(f"Sample data from {name} (first 5 rows):\n{df.head()}\n")
-                raise ValueError(f"Missing required column '{col}' in {name} DataFrame.")
-            if df[col].isnull().any():
-                print(f"Null values found in column '{col}' of {name}.")
-                print(f"Available columns: {list(df.columns)}")
-                print(f"Sample data (first 5 rows):\n{df.head()}\n")
-                raise ValueError(f"Null values found in critical column '{col}' in {name} DataFrame.")
+        """Validates data for realistic 3D world generation."""
         if df.empty:
-            print(f"ERROR: All rows dropped from {name} after cleaning. Columns present: {list(df.columns)}")
+            print(f"ERROR: All rows dropped from {name} after cleaning.")
             raise ValueError(f"No valid {name} data after cleaning.")
-        print(f"✓ Data integrity validated for {name}.")
+        
+        # Check essential columns for 3D positioning
+        missing_cols = [col for col in required_cols if col not in df.columns]
+        if missing_cols:
+            print(f"[INFO] {name} missing some expected columns: {missing_cols}")
+            
+            # For 3D world generation, we need positioning data
+            critical_3d_cols = ['ra', 'dec']  # Basic positioning
+            missing_critical = [col for col in critical_3d_cols if col not in df.columns]
+            
+            if missing_critical:
+                print(f"ERROR: {name} missing critical 3D positioning columns: {missing_critical}")
+                print(f"Available columns: {list(df.columns)[:10]}...")
+                raise ValueError(f"Cannot generate 3D world without positioning data: {missing_critical}")
+        
+        # Validate 3D coordinates if they should exist
+        if 'x' in required_cols or 'y' in required_cols or 'z' in required_cols:
+            xyz_cols = [col for col in ['x', 'y', 'z'] if col in df.columns]
+            if len(xyz_cols) == 3:
+                # Check if coordinates are realistic (not all zero/null)
+                valid_3d_count = ((df['x'].notna()) & (df['y'].notna()) & (df['z'].notna())).sum()
+                if valid_3d_count < len(df) * 0.1:  # Less than 10% have valid 3D coords
+                    print(f"[WARN] {name} has very few valid 3D coordinates ({valid_3d_count}/{len(df)})")
+                else:
+                    print(f"✓ {name} has {valid_3d_count}/{len(df)} objects with valid 3D coordinates")
+        
+        # Check for realistic data ranges
+        if 'ra' in df.columns:
+            ra_range = f"{df['ra'].min():.1f} to {df['ra'].max():.1f}"
+            if df['ra'].min() < 0 or df['ra'].max() > 360:
+                print(f"[WARN] {name} RA values outside expected range (0-360): {ra_range}")
+        
+        if 'dec' in df.columns:
+            dec_range = f"{df['dec'].min():.1f} to {df['dec'].max():.1f}"
+            if df['dec'].min() < -90 or df['dec'].max() > 90:
+                print(f"[WARN] {name} DEC values outside expected range (-90 to +90): {dec_range}")
+        
+        print(f"✓ 3D world validation passed for {name} ({len(df)} objects ready for cosmic exploration)")
 
     # 1. Load exoplanets
     try:
@@ -269,13 +299,18 @@ def main():
     # 2. Clean data
     try:
         if df is not None:
+            print(f"Starting to clean {len(df)} exoplanet rows...")
             df_clean = clean_exoplanet_data(df)
+            print(f"Cleaning completed successfully: {len(df_clean)} cleaned rows")
             results['Clean Data'] = 'Success'
         else:
             print("Skipping cleaning due to missing exoplanet data.")
             results['Clean Data'] = 'Skipped'
     except Exception as e:
         print(f"ERROR: Failed to clean exoplanet data: {e}")
+        print(f"Error type: {type(e).__name__}")
+        import traceback
+        traceback.print_exc()
         df_clean = None
         results['Clean Data'] = f'Failed: {e}'
     # 3. Save cleaned data

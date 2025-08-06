@@ -33,7 +33,7 @@ if [ -f /app/web_portal/package.json ]; then\n\
 fi\n\
 \n\
 # Execute the original entrypoint\n\
-exec npm start "$@"'  /app/start.sh && \
+exec npm start "$@"' > /app/start.sh && \
     chmod +x /app/start.sh
 
 # Entrypoint for React app

@@ -13,7 +13,7 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 plt.ioff()
 
-RAW_DATA_DIR = Path("/workspace/data/raw")
+RAW_DATA_DIR = Path("/tmp/data/raw")
 RAW_DATA_DIR.mkdir(parents=True, exist_ok=True)
 
 # --- 1. NASA Exoplanet Archive ---
@@ -327,7 +327,7 @@ def fetch_simbad_names(gaia_ids, ras, decs, max_ids=1000):
             print(f"Processed {i+1} stars: {successful_queries} successful, {failed_queries} failed")
     print(f"SIMBAD query results: {successful_queries} successful, {failed_queries} failed")
     df = pd.DataFrame(names)
-    out_path = Path('data/raw/simbad_names.csv')
+    out_path = Path('/tmp/data/raw/simbad_names.csv')
     df.to_csv(out_path, index=False)
     print(f"Saved: {out_path}")
     return df

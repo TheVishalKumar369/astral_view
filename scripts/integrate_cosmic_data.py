@@ -9,8 +9,11 @@ from pathlib import Path
 import json
 from datetime import datetime
 
-RAW_DATA_DIR = Path("data/raw")
-PROCESSED_DATA_DIR = Path("data/processed")
+# Use relative paths from the script directory
+script_dir = Path(__file__).parent
+project_dir = script_dir.parent
+RAW_DATA_DIR = project_dir / "data" / "raw"
+PROCESSED_DATA_DIR = project_dir / "data" / "processed"
 PROCESSED_DATA_DIR.mkdir(parents=True, exist_ok=True)
 
 def load_all_processed_data():
@@ -345,48 +348,61 @@ def create_unified_cosmic_world(data_sources):
     }
     
     # Process stars
+    star_catalog = None
     if 'gaia_stars' in data_sources:
-        star_catalog = create_star_catalog(
-            data_sources['gaia_stars'], 
-            data_sources.get('simbad_names')
-        )
-        cosmic_world['stars'] = {
-            'catalog': star_catalog.to_dict('records'),
-            'count': len(star_catalog),
-            'named_stars': len(star_catalog[star_catalog['has_common_name'] == True]) if 'has_common_name' in star_catalog.columns else 0
-        }
-        cosmic_world['metadata']['total_objects'] += len(star_catalog)
+        try:
+            star_catalog = create_star_catalog(
+                data_sources['gaia_stars'], 
+                data_sources.get('simbad_names')
+            )
+            cosmic_world['stars'] = {
+                'catalog': star_catalog.to_dict('records'),
+                'count': len(star_catalog),
+                'named_stars': len(star_catalog[star_catalog['has_common_name'] == True]) if 'has_common_name' in star_catalog.columns else 0
+            }
+            cosmic_world['metadata']['total_objects'] += len(star_catalog)
+        except Exception as e:
+            print(f"Warning: Failed to process Gaia stars data: {e}")
     
     # Process exoplanets
-    if 'exoplanets' in data_sources and 'gaia_stars' in data_sources:
-        exoplanet_catalog = create_exoplanet_catalog(
-            data_sources['exoplanets'], 
-            star_catalog
-        )
-        cosmic_world['exoplanets'] = {
-            'catalog': exoplanet_catalog.to_dict('records'),
-            'count': len(exoplanet_catalog),
-            'habitable': len(exoplanet_catalog[exoplanet_catalog['habitability'] == 'Potentially Habitable'])
-        }
-        cosmic_world['metadata']['total_objects'] += len(exoplanet_catalog)
+    if 'exoplanets' in data_sources and 'gaia_stars' in data_sources and star_catalog is not None:
+        try:
+            exoplanet_catalog = create_exoplanet_catalog(
+                data_sources['exoplanets'], 
+                star_catalog
+            )
+            cosmic_world['exoplanets'] = {
+                'catalog': exoplanet_catalog.to_dict('records'),
+                'count': len(exoplanet_catalog),
+                'habitable': len(exoplanet_catalog[exoplanet_catalog['habitability'] == 'Potentially Habitable'])
+            }
+            cosmic_world['metadata']['total_objects'] += len(exoplanet_catalog)
+        except Exception as e:
+            print(f"Warning: Failed to process exoplanet data: {e}")
     
     # Process Solar System
     if 'solar_system' in data_sources:
-        solar_catalog = create_solar_system_catalog(data_sources['solar_system'])
-        cosmic_world['solar_system'] = {
-            'catalog': solar_catalog.to_dict('records'),
-            'count': len(solar_catalog)
-        }
-        cosmic_world['metadata']['total_objects'] += len(solar_catalog)
+        try:
+            solar_catalog = create_solar_system_catalog(data_sources['solar_system'])
+            cosmic_world['solar_system'] = {
+                'catalog': solar_catalog.to_dict('records'),
+                'count': len(solar_catalog)
+            }
+            cosmic_world['metadata']['total_objects'] += len(solar_catalog)
+        except Exception as e:
+            print(f"Warning: Failed to process Solar System data: {e}")
     
     # Process Messier objects
     if 'messier' in data_sources:
-        messier_catalog = create_messier_catalog(data_sources['messier'])
-        cosmic_world['deep_sky_objects'] = {
-            'catalog': messier_catalog.to_dict('records'),
-            'count': len(messier_catalog)
-        }
-        cosmic_world['metadata']['total_objects'] += len(messier_catalog)
+        try:
+            messier_catalog = create_messier_catalog(data_sources['messier'])
+            cosmic_world['deep_sky_objects'] = {
+                'catalog': messier_catalog.to_dict('records'),
+                'count': len(messier_catalog)
+            }
+            cosmic_world['metadata']['total_objects'] += len(messier_catalog)
+        except Exception as e:
+            print(f"Warning: Failed to process Messier catalog data: {e}")
     
     return cosmic_world
 
@@ -444,16 +460,16 @@ def main():
     print("=" * 50)
     print(f"Total objects: {cosmic_world['metadata']['total_objects']}")
     
-    if cosmic_world['stars']['catalog']:
+    if 'stars' in cosmic_world and cosmic_world['stars'].get('catalog'):
         print(f"Stars: {cosmic_world['stars']['count']} (including {cosmic_world['stars']['named_stars']} with common names)")
     
-    if cosmic_world['exoplanets']['catalog']:
+    if 'exoplanets' in cosmic_world and cosmic_world['exoplanets'].get('catalog'):
         print(f"Exoplanets: {cosmic_world['exoplanets']['count']} (including {cosmic_world['exoplanets']['habitable']} potentially habitable)")
     
-    if cosmic_world['solar_system']['catalog']:
+    if 'solar_system' in cosmic_world and cosmic_world['solar_system'].get('catalog'):
         print(f"Solar System objects: {cosmic_world['solar_system']['count']}")
     
-    if cosmic_world['deep_sky_objects']['catalog']:
+    if 'deep_sky_objects' in cosmic_world and cosmic_world['deep_sky_objects'].get('catalog'):
         print(f"Deep sky objects: {cosmic_world['deep_sky_objects']['count']}")
     
     print(f"\nData saved to: {PROCESSED_DATA_DIR}")

@@ -1,15 +1,16 @@
 # Containerfile.data: Data Processing Container (GPU-ready)
 FROM nvidia/cuda:12.2.0-devel-ubuntu22.04
 
-# System dependencies including GPU monitoring tools
+# System dependencies (removing conflicting GPU packages)
 RUN apt-get update && apt-get install -y \
     python3.10 python3.10-venv python3.10-dev python3-pip \
     build-essential git wget curl \
     xvfb x11-utils \
-    nvidia-utils-525 \
-    nvidia-cuda-toolkit \
-    htop nvtop \
+    htop \
     && rm -rf /var/lib/apt/lists/*
+
+# Install GPU monitoring tools separately if needed
+# RUN apt-get update && apt-get install -y nvtop && rm -rf /var/lib/apt/lists/* || true
 
 # Set python3.10 as default
 RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.10 1
@@ -34,6 +35,10 @@ RUN chmod +x scripts/run_data_collection.sh
 # Create a startup script that correctly handles dependencies and GPU detection
 RUN echo '#!/bin/bash\n\
 echo "🚀 Starting data service..."\n\
+\n\
+# Ensure data directories exist with proper permissions\n\
+echo "📁 Setting up data directories..."\n\
+mkdir -p /tmp/data/raw /tmp/data/processed\n\
 \n\
 # Check GPU availability\n\
 echo "🔍 Checking GPU availability..."\n\
@@ -70,7 +75,9 @@ except Exception as e:\n\
 "\n\
 \n\
 echo "✅ Dependencies are up-to-date. Running data collection..."\n\
-exec ./scripts/run_data_collection.sh "$@" \n\
+./scripts/run_data_collection.sh "$@"\n\
+echo "📦 Copying results to mounted volume..."\n\
+cp -r /tmp/data/* /workspace/data/ 2> /dev/null || echo "Warning: Could not copy all data files."\n\
 ' > /workspace/start.sh && \
     chmod +x /workspace/start.sh
 
