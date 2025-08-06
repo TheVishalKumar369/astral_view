@@ -21,7 +21,7 @@ def load_nasa_exoplanets():
     path = RAW_DATA_DIR / "nasa_exoplanets.csv"
     if not path.exists():
         raise FileNotFoundError(f"{path} not found. Run collect_data.py first.")
-    df = pd.read_csv(path)
+    df = pd.read_csv(path, comment='#')
     return df
 
 def clean_exoplanet_data(df):
@@ -164,7 +164,7 @@ def load_gaia_host_stars():
     if not path.exists():
         print(f"{path} not found. Skipping Gaia host stars.")
         return None
-    df = pd.read_csv(path)
+    df = pd.read_csv(path, comment='#')
     return df
 
 def clean_gaia_data(df):
@@ -194,7 +194,7 @@ def load_messier():
     if not path.exists():
         print(f"{path} not found. Skipping Messier catalog.")
         return None
-    df = pd.read_csv(path)
+    df = pd.read_csv(path, comment='#')
     return df
 
 def clean_messier_data(df):
@@ -219,7 +219,7 @@ def load_solar_system():
     if not path.exists():
         print(f"{path} not found. Skipping Solar System.")
         return None
-    df = pd.read_csv(path)
+    df = pd.read_csv(path, comment='#')
     return df
 
 def clean_solar_system_data(df):

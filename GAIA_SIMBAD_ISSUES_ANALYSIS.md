@@ -153,7 +153,7 @@ ORDER BY phot_g_mean_mag
 ### 1. **Immediate Fixes**
 Run the comprehensive fix script:
 ```bash
-docker compose run --rm data_service python scripts/fix_gaia_simbad_issues.py
+podman-compose run --rm data_service python scripts/fix_gaia_simbad_issues.py
 ```
 
 ### 2. **Alternative Data Sources**
@@ -198,12 +198,12 @@ Add comprehensive validation:
 
 ### 1. **Run the Fix Script**
 ```bash
-docker compose run --rm data_service python scripts/fix_gaia_simbad_issues.py
+podman-compose run --rm data_service python scripts/fix_gaia_simbad_issues.py
 ```
 
 ### 2. **Verify Results**
 ```bash
-docker compose run --rm data_service python scripts/validate_data.py
+podman-compose run --rm data_service python scripts/validate_data.py
 ```
 
 ### 3. **Check Data Quality**

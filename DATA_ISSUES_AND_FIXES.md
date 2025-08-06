@@ -98,17 +98,17 @@ if hasattr(vectors, 'columns'):
 
 ### Option 1: Run the Fix Script (Recommended)
 ```bash
-docker compose run --rm data_service python scripts/fix_data_issues.py
+podman-compose run --rm data_service python scripts/fix_data_issues.py
 ```
 
 ### Option 2: Re-run Data Collection
 ```bash
-docker compose run --rm data_service python scripts/collect_data.py
+podman-compose run --rm data_service python scripts/collect_data.py
 ```
 
 ### Option 3: Validate Current Data
 ```bash
-docker compose run --rm data_service python scripts/validate_data.py
+podman-compose run --rm data_service python scripts/validate_data.py
 ```
 
 ## Expected Results After Fix
@@ -152,7 +152,7 @@ After running the fixes, you should see:
 If you still encounter issues:
 
 1. **Check API Connectivity**: Ensure internet connection for NASA and JPL APIs
-2. **Check Docker Environment**: Ensure all required packages are installed
+2. **Check Podman Environment**: Ensure all required packages are installed
 3. **Check Data Directory**: Ensure `/workspace/data/raw` exists and is writable
 4. **Review Error Messages**: The scripts now provide detailed error reporting
 
