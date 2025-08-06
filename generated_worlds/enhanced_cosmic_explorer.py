@@ -74,9 +74,9 @@ class EnhancedCosmicExplorer(Entity):
         
         for i, star_data in enumerate(stars[:200]):  # Limit for performance
             # Get position (already in light years, scaled down)
-            pos_x = star_data.get('x', 0) * 0.32238
-            pos_y = star_data.get('y', 0) * 0.32238  
-            pos_z = star_data.get('z', 0) * 0.32238
+            pos_x = star_data.get('x', 0) * 0.5078145949479146
+            pos_y = star_data.get('y', 0) * 0.5078145949479146  
+            pos_z = star_data.get('z', 0) * 0.5078145949479146
             
             # Determine star properties
             distance = star_data.get('distance_ly', 100)
