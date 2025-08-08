@@ -1,0 +1,34 @@
+# Advanced Cosmic Simulation Engine Requirements
+# Core 3D Engine
+panda3d==1.10.14
+
+# Scientific Computing
+numpy==1.24.3
+scipy==1.11.1
+astropy==5.3.4
+astroquery==0.4.6
+
+# Physics Simulation
+pybullet==3.2.5
+
+# Image Processing & Textures
+Pillow==10.0.0
+opencv-python==4.8.1.78
+noise==1.2.2
+
+# Data Processing
+pandas==2.0.3
+h5py==3.9.0
+
+# Shader & Graphics
+ModernGL==5.8.2
+PyOpenGL==3.1.7
+
+# Utilities
+tqdm==4.65.0
+matplotlib==3.7.2
+
+# Optional: Advanced features
+# trimesh==3.23.5
+# pymeshlab==2023.12
+# numba==0.57.1

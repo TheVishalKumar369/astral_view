@@ -1,0 +1,73 @@
+{
+  "engine_info": {
+    "name": "Ursina Engine",
+    "version": "1.0",
+    "description": "Lightweight Python-based 3D engine perfect for rapid prototyping and learning",
+    "category": "desktop",
+    "performance_level": "high",
+    "difficulty": "beginner"
+  },
+  "variants": {
+    "simple": {
+      "name": "Ursina Simple Explorer",
+      "file": "cosmic_explorer_simple.py",
+      "description": "Basic 3D cosmic exploration with simple controls",
+      "features": [
+        "Fast startup and loading",
+        "Simple WASD movement",
+        "Basic 3D navigation",
+        "Lightweight resource usage",
+        "Real cosmic data integration"
+      ],
+      "requirements": ["ursina>=4.0.0", "numpy>=1.20.0"],
+      "recommended_for": ["beginners", "low_spec_systems", "quick_testing"],
+      "pros": [
+        "Very fast performance",
+        "Easy to understand controls",
+        "Minimal system requirements",
+        "Quick startup time"
+      ],
+      "cons": [
+        "Basic graphics quality",
+        "Limited physics simulation",
+        "Simple material system"
+      ]
+    },
+    "enhanced": {
+      "name": "Ursina Enhanced Explorer", 
+      "file": "cosmic_explorer_fixed.py",
+      "description": "Enhanced 3D exploration with improved graphics and controls",
+      "features": [
+        "Enhanced graphics and lighting",
+        "Improved object visibility",
+        "Mouse lock/unlock functionality",
+        "Better UI design",
+        "Glow effects for objects",
+        "Proximity detection system"
+      ],
+      "requirements": ["ursina>=4.0.0", "numpy>=1.20.0"],
+      "recommended_for": ["general_use", "education", "demonstrations"],
+      "pros": [
+        "Good balance of features and performance",
+        "Enhanced visual effects",
+        "Better user interface",
+        "Stable and reliable"
+      ],
+      "cons": [
+        "Still limited physics",
+        "Basic material system",
+        "No advanced lighting"
+      ]
+    }
+  },
+  "installation": {
+    "dependencies": ["ursina", "numpy", "pathlib"],
+    "install_command": "pip install ursina numpy",
+    "system_requirements": {
+      "python": "3.7+",
+      "ram": "2GB minimum",
+      "graphics": "Integrated graphics sufficient",
+      "disk": "50MB"
+    }
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "engine_info": {
+    "name": "Godot Engine",
+    "version": "4.0+",
+    "description": "Powerful open-source game engine with excellent 3D capabilities and visual scripting",
+    "category": "desktop",
+    "performance_level": "high",
+    "difficulty": "intermediate"
+  },
+  "variants": {
+    "standard": {
+      "name": "Godot Standard",
+      "file": "cosmic_explorer.tscn",
+      "description": "Standard Godot implementation with GDScript",
+      "features": [
+        "Professional 3D rendering",
+        "Built-in physics engine",
+        "Visual scripting support",
+        "Cross-platform deployment",
+        "Advanced materials and lighting",
+        "Animation system"
+      ],
+      "requirements": ["godot>=4.0", "opengl>=3.3"],
+      "recommended_for": [
+        "developers", 
+        "educators", 
+        "advanced_users"
+      ],
+      "pros": [
+        "Free and open-source",
+        "User-friendly editor",
+        "Excellent documentation",
+        "Strong community support",
+        "Cross-platform compatibility"
+      ],
+      "cons": [
+        "Requires engine installation",
+        "GDScript learning curve",
+        "Larger project size",
+        "Export process complexity"
+      ]
+    },
+    "csharp": {
+      "name": "Godot C# Edition",
+      "file": "cosmic_explorer_csharp.tscn",
+      "description": "Godot implementation using C# scripting",
+      "features": [
+        "All standard Godot features",
+        "C# scripting support",
+        ".NET integration",
+        "Enhanced debugging",
+        "Better IDE support"
+      ],
+      "requirements": [
+        "godot>=4.0", 
+        ".net>=6.0", 
+        "mono"
+      ],
+      "recommended_for": [
+        "c_sharp_developers", 
+        "enterprise_users"
+      ],
+      "pros": [
+        "Familiar C# syntax",
+        "Strong typing",
+        "Better IDE integration",
+        "Enhanced debugging tools"
+      ],
+      "cons": [
+        "Additional .NET requirements",
+        "Larger runtime dependencies",
+        "More complex setup"
+      ]
+    }
+  },
+  "installation": {
+    "dependencies": ["Godot Engine 4.0+", "Optional: .NET 6.0+"],
+    "install_command": "Download from https://godotengine.org/",
+    "system_requirements": {
+      "os": "Windows 10+, macOS 10.12+, Linux",
+      "ram": "4GB minimum, 8GB recommended",
+      "graphics": "OpenGL 3.3+ or Vulkan-compatible GPU",
+      "disk": "1GB available space"
+    }
+  }
+}

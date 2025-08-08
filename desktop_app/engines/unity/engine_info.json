@@ -1,0 +1,90 @@
+{
+  "engine_info": {
+    "name": "Unity Engine",
+    "version": "2022.3+",
+    "description": "Industry-leading game engine with professional 3D capabilities and comprehensive toolset",
+    "category": "desktop",
+    "performance_level": "high",
+    "difficulty": "advanced"
+  },
+  "variants": {
+    "standard": {
+      "name": "Unity Standard",
+      "file": "CosmicExplorer.unity",
+      "description": "Standard Unity implementation with C# scripting",
+      "features": [
+        "Professional 3D rendering",
+        "Advanced physics system",
+        "Visual scripting (Bolt)",
+        "Cross-platform deployment",
+        "Asset store integration",
+        "Advanced shader system",
+        "Timeline and animation tools"
+      ],
+      "requirements": ["unity>=2022.3", "visual_studio", "dotnet>=4.7"],
+      "recommended_for": [
+        "professional_developers", 
+        "commercial_projects"
+      ],
+      "pros": [
+        "Industry standard engine",
+        "Extensive asset store",
+        "Professional toolset",
+        "Excellent documentation",
+        "Strong community",
+        "Advanced rendering pipeline"
+      ],
+      "cons": [
+        "Requires Unity installation",
+        "Licensing costs for commercial use",
+        "Large project size",
+        "Complex learning curve",
+        "Heavyweight for simple projects"
+      ]
+    },
+    "hdrp": {
+      "name": "Unity HDRP",
+      "file": "CosmicExplorer_HDRP.unity",
+      "description": "High Definition Render Pipeline for photorealistic graphics",
+      "features": [
+        "Photorealistic rendering",
+        "Advanced lighting systems",
+        "Volume rendering",
+        "Ray tracing support",
+        "Advanced materials",
+        "Post-processing stack"
+      ],
+      "requirements": [
+        "unity>=2022.3", 
+        "hdrp_package", 
+        "dedicated_gpu"
+      ],
+      "recommended_for": [
+        "high_end_systems", 
+        "professional_visualization"
+      ],
+      "pros": [
+        "Photorealistic quality",
+        "Advanced lighting",
+        "Ray tracing support",
+        "Professional materials"
+      ],
+      "cons": [
+        "Very high system requirements",
+        "Complex setup",
+        "Performance intensive",
+        "Requires modern GPU"
+      ]
+    }
+  },
+  "installation": {
+    "dependencies": ["Unity Hub", "Unity 2022.3+", "Visual Studio"],
+    "install_command": "Download from https://unity.com/",
+    "system_requirements": {
+      "os": "Windows 10+, macOS 10.13+, Linux Ubuntu 18.04+",
+      "ram": "8GB minimum, 16GB recommended",
+      "graphics": "DirectX 11 compatible, RTX GPU for HDRP",
+      "disk": "5GB available space"
+    }
+  }
+}

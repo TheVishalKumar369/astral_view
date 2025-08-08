@@ -1,0 +1,36 @@
+# Stop current machine
+podman machine stop
+
+# Remove old machine (optional)
+# podman machine rm podman-machine-default --force
+
+# Create new machine optimized for your 8GB system
+podman machine init `
+  --cpus 4 `
+  --memory 4096 `
+  --disk-size 100 `
+  --rootful=true `
+  p-drive-cosmic
+
+# Start new machine
+podman machine start p-drive-cosmic
+
+# Verify it's working
+podman machine list
+
+   # Check memory usage
+   Get-Process | Sort-Object WorkingSet -Descending | Select-Object -First 10 Name, @{Name="Memory(MB)";Expression={[math]::Round($_.WorkingSet/1MB,2)}}
+
+# Run data processing first
+podman-compose run --rm data_service python scripts/process_data.py
+
+# Then run desktop app (stop data_service first)
+podman-compose run --rm desktop_app
+
+podman-compose up web_portal
+
+# Check Podman machine resource usage
+podman machine inspect p-drive-cosmic
+
+# Monitor system memory
+Get-Counter "\Memory\Available MBytes"

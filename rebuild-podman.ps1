@@ -34,3 +34,9 @@ Write-Host "Alternative Podman commands:" -ForegroundColor Cyan
 Write-Host "  podman build -f Containerfile.data -t cosmic_explorer_data ." -ForegroundColor White
 Write-Host "  podman build -f Containerfile.desktop -t cosmic_explorer_desktop ." -ForegroundColor White
 Write-Host "  podman build -f Containerfile.web -t cosmic_explorer_web ." -ForegroundColor White
+Write-Host ""
+Write-Host "For Windows compatibility, use:" -ForegroundColor Cyan
+Write-Host "  podman-compose -f podman-compose-windows.yml build" -ForegroundColor White
+Write-Host ""
+Write-Host "To test individual builds:" -ForegroundColor Cyan
+Write-Host "  podman build --no-cache -f Containerfile.data -t cosmic_explorer_data ." -ForegroundColor White

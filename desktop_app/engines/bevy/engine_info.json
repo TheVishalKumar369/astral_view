@@ -1,0 +1,90 @@
+{
+  "engine_info": {
+    "name": "Bevy Engine",
+    "version": "0.12+",
+    "description": "Modern, data-driven game engine built in Rust with ECS architecture",
+    "category": "desktop",
+    "performance_level": "very_high",
+    "difficulty": "advanced"
+  },
+  "variants": {
+    "standard": {
+      "name": "Bevy Standard",
+      "file": "cosmic_explorer.rs",
+      "description": "Standard Bevy implementation with ECS architecture",
+      "features": [
+        "Data-driven ECS architecture",
+        "High-performance Rust code",
+        "Modern rendering pipeline",
+        "Built-in async support",
+        "Hot asset reloading",
+        "Modular plugin system",
+        "Cross-platform support"
+      ],
+      "requirements": ["rust>=1.70", "cargo", "bevy>=0.12"],
+      "recommended_for": [
+        "rust_developers", 
+        "performance_critical_apps"
+      ],
+      "pros": [
+        "Extremely high performance",
+        "Memory safe Rust",
+        "Modern architecture",
+        "Fast compilation",
+        "Open source",
+        "Growing ecosystem"
+      ],
+      "cons": [
+        "Requires Rust knowledge",
+        "Smaller community",
+        "Still in development",
+        "Limited tooling",
+        "Steep learning curve"
+      ]
+    },
+    "wgpu": {
+      "name": "Bevy WGPU",
+      "file": "cosmic_explorer_wgpu.rs",
+      "description": "Bevy with advanced WGPU rendering backend",
+      "features": [
+        "All standard Bevy features",
+        "Advanced GPU compute",
+        "Custom shader support",
+        "WebGPU compatibility",
+        "Multi-threaded rendering"
+      ],
+      "requirements": [
+        "rust>=1.70", 
+        "cargo", 
+        "bevy>=0.12", 
+        "wgpu"
+      ],
+      "recommended_for": [
+        "advanced_graphics", 
+        "compute_shaders"
+      ],
+      "pros": [
+        "Cutting-edge graphics",
+        "GPU compute support",
+        "Future-proof rendering",
+        "Cross-platform GPU code"
+      ],
+      "cons": [
+        "Requires modern GPU",
+        "Complex setup",
+        "Experimental features",
+        "Limited documentation"
+      ]
+    }
+  },
+  "installation": {
+    "dependencies": ["Rust 1.70+", "Cargo", "Bevy 0.12+"],
+    "install_command": "cargo add bevy",
+    "system_requirements": {
+      "os": "Windows 10+, macOS 10.12+, Linux",
+      "ram": "4GB minimum, 8GB recommended",
+      "graphics": "OpenGL 3.3+ or Vulkan/DirectX 12",
+      "disk": "2GB available space"
+    }
+  }
+}

@@ -34,7 +34,7 @@
       "display_name": "EPIC 210731500.01",
       "star_type": "Unknown",
       "distance_ly": 1627.2280476922358,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -106,7 +106,7 @@
       "display_name": "** TOI 5319A",
       "star_type": "Unknown",
       "distance_ly": 198.27165029880007,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -142,7 +142,7 @@
       "display_name": "AP J04233539+2503026",
       "star_type": "Unknown",
       "distance_ly": 416.2582336925744,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -178,7 +178,7 @@
       "display_name": "DH Tau B",
       "star_type": "Unknown",
       "distance_ly": 435.2463762829236,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -196,7 +196,7 @@
       "display_name": "HIP 22910",
       "star_type": "Unknown",
       "distance_ly": 508.6087334643056,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -214,7 +214,7 @@
       "display_name": "IRAS 04125+2902 b",
       "star_type": "Unknown",
       "distance_ly": 522.0647341766479,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -340,7 +340,7 @@
       "display_name": "",
       "star_type": "Unknown",
       "distance_ly": 77.88646341123558,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -394,7 +394,7 @@
       "display_name": "TIC 63564248",
       "star_type": "Unknown",
       "distance_ly": 1594.8680976818896,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -448,7 +448,7 @@
       "display_name": "TIC 53848538",
       "star_type": "Unknown",
       "distance_ly": 705.7948586072467,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -502,7 +502,7 @@
       "display_name": "UCAC4 731-024744",
       "star_type": "Unknown",
       "distance_ly": 2206.6617321094695,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -574,7 +574,7 @@
       "display_name": "HIP 26638",
       "star_type": "Unknown",
       "distance_ly": 692.7036091926752,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -610,7 +610,7 @@
       "display_name": "PM J01276+7217b",
       "star_type": "Unknown",
       "distance_ly": 146.74727790025563,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -664,7 +664,7 @@
       "display_name": "HIP 15135",
       "star_type": "Unknown",
       "distance_ly": 861.4767483944573,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -772,7 +772,7 @@
       "display_name": "EPIC 211359660 b",
       "star_type": "Unknown",
       "distance_ly": 504.0380498277903,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -790,7 +790,7 @@
       "display_name": "",
       "star_type": "Unknown",
       "distance_ly": 71.11599390512256,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -988,7 +988,7 @@
       "display_name": "EPIC 211919004 b",
       "star_type": "Unknown",
       "distance_ly": 1001.4880487554941,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -1042,7 +1042,7 @@
       "display_name": "K2-146b",
       "star_type": "Unknown",
       "distance_ly": 262.7257082797734,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -1096,7 +1096,7 @@
       "display_name": "K2-122b",
       "star_type": "Unknown",
       "distance_ly": 235.84036125665665,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -1150,7 +1150,7 @@
       "display_name": "LAMOST J085852.52+210429.2",
       "star_type": "Unknown",
       "distance_ly": 90.77587519332093,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -1168,7 +1168,7 @@
       "display_name": "TOI-1806.01",
       "star_type": "Unknown",
       "distance_ly": 180.73129059782596,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -1348,7 +1348,7 @@
       "display_name": "",
       "star_type": "Unknown",
       "distance_ly": 31.074620737933525,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -1402,7 +1402,7 @@
       "display_name": "",
       "star_type": "Unknown",
       "distance_ly": 30.97588948681159,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -1438,7 +1438,7 @@
       "display_name": "TYC 4384-1735-1",
       "star_type": "Unknown",
       "distance_ly": 129.2062963308309,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -1456,7 +1456,7 @@
       "display_name": "PM J08024+6447b",
       "star_type": "Unknown",
       "distance_ly": 198.7047855864413,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -1582,7 +1582,7 @@
       "display_name": "HIP 78159",
       "star_type": "Unknown",
       "distance_ly": 241.73584143577241,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -1654,7 +1654,7 @@
       "display_name": "TOI-5688 A b",
       "star_type": "Unknown",
       "distance_ly": 741.2686428261077,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -1726,7 +1726,7 @@
       "display_name": "TOI-1846",
       "star_type": "Unknown",
       "distance_ly": 154.08890865585477,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -1816,7 +1816,7 @@
       "display_name": "",
       "star_type": "Unknown",
       "distance_ly": 73.39530804907517,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -2140,7 +2140,7 @@
       "display_name": "Karmn J13119+658",
       "star_type": "Unknown",
       "distance_ly": 117.57592948927218,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -2176,7 +2176,7 @@
       "display_name": "TOI-4138",
       "star_type": "Unknown",
       "distance_ly": 1656.0014512019197,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -2212,7 +2212,7 @@
       "display_name": "TOI-2257",
       "star_type": "Unknown",
       "distance_ly": 188.718904094991,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -2338,7 +2338,7 @@
       "display_name": "V391 Peg b",
       "star_type": "Unknown",
       "distance_ly": 4414.651910211696,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -2356,7 +2356,7 @@
       "display_name": "TOI-1410.02",
       "star_type": "Unknown",
       "distance_ly": 236.72215161095497,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -2374,7 +2374,7 @@
       "display_name": "Taika",
       "star_type": "Unknown",
       "distance_ly": 1588.3565514560041,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -2410,7 +2410,7 @@
       "display_name": "HD 240237b",
       "star_type": "Unknown",
       "distance_ly": 3008.61263512001,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -2986,7 +2986,7 @@
       "display_name": "KOI-3002.01",
       "star_type": "Unknown",
       "distance_ly": 2920.8114550743717,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -3094,7 +3094,7 @@
       "display_name": "AP J19240483+3913144",
       "star_type": "Unknown",
       "distance_ly": 4583.960810575564,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -3112,7 +3112,7 @@
       "display_name": "KOI-2013.01",
       "star_type": "Unknown",
       "distance_ly": 492.55945639166816,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -3166,7 +3166,7 @@
       "display_name": "Kepler-1741b",
       "star_type": "Unknown",
       "distance_ly": 877.3056721861257,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -3220,7 +3220,7 @@
       "display_name": "KOI-2719.01",
       "star_type": "Unknown",
       "distance_ly": 1582.2380192043804,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -3256,7 +3256,7 @@
       "display_name": "Kepler-1843b",
       "star_type": "Unknown",
       "distance_ly": 2597.132935627641,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -3634,7 +3634,7 @@
       "display_name": "** KOI 2174B",
       "star_type": "Unknown",
       "distance_ly": 2113.3691463182017,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -3778,7 +3778,7 @@
       "display_name": "KOI-6132.01",
       "star_type": "Unknown",
       "distance_ly": 3822.1019304434576,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -4318,7 +4318,7 @@
       "display_name": "KOI-1241.10",
       "star_type": "Unknown",
       "distance_ly": 3032.535455837228,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -4948,7 +4948,7 @@
       "display_name": "KOI-2688.01",
       "star_type": "Unknown",
       "distance_ly": 465.3833188043953,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -5020,7 +5020,7 @@
       "display_name": "Kepler-32c",
       "star_type": "Unknown",
       "distance_ly": 1053.482615977499,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -5272,7 +5272,7 @@
       "display_name": "Kepler-267b",
       "star_type": "Unknown",
       "distance_ly": 883.3261451428609,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -5614,7 +5614,7 @@
       "display_name": "KOI-1876.01",
       "star_type": "Unknown",
       "distance_ly": 1287.9474534034025,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -5668,7 +5668,7 @@
       "display_name": "Xihe",
       "star_type": "Unknown",
       "distance_ly": 432.78184310055127,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -5704,7 +5704,7 @@
       "display_name": "KOI-3415.01",
       "star_type": "Unknown",
       "distance_ly": 3436.5090066665925,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -6064,7 +6064,7 @@
       "display_name": "Kepler-1951b",
       "star_type": "Unknown",
       "distance_ly": 4320.777489718448,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -6226,7 +6226,7 @@
       "display_name": "KOI-4290.01",
       "star_type": "Unknown",
       "distance_ly": 254.7715440593075,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -6532,7 +6532,7 @@
       "display_name": "LAMOST J191255.34+422449.0",
       "star_type": "Unknown",
       "distance_ly": 6444.169059527272,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -6586,7 +6586,7 @@
       "display_name": "Kepler-158b",
       "star_type": "Unknown",
       "distance_ly": 1037.7701687054425,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -6856,7 +6856,7 @@
       "display_name": "Kepler-338c",
       "star_type": "Unknown",
       "distance_ly": 1796.8621236057327,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -7018,7 +7018,7 @@
       "display_name": "Kepler-1863b",
       "star_type": "Unknown",
       "distance_ly": 2890.80739279658,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -7036,7 +7036,7 @@
       "display_name": "UCAC4 669-067990",
       "star_type": "Unknown",
       "distance_ly": 1296.347981130805,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -7126,7 +7126,7 @@
       "display_name": "KIC 8540376c",
       "star_type": "Unknown",
       "distance_ly": 3505.9399343998657,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -7198,7 +7198,7 @@
       "display_name": "Kepler-1874",
       "star_type": "Unknown",
       "distance_ly": 1146.9874677740947,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -7216,7 +7216,7 @@
       "display_name": "KOI-4364.01",
       "star_type": "Unknown",
       "distance_ly": 2740.779718050445,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -7990,7 +7990,7 @@
       "display_name": "",
       "star_type": "Unknown",
       "distance_ly": 50.774768600605796,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -8206,7 +8206,7 @@
       "display_name": "TIC 63285279",
       "star_type": "Unknown",
       "distance_ly": 4729.394326440968,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -8620,7 +8620,7 @@
       "display_name": "TIC 159581434",
       "star_type": "Unknown",
       "distance_ly": 2060.352138779077,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -8674,7 +8674,7 @@
       "display_name": "KOI-1520.01",
       "star_type": "Unknown",
       "distance_ly": 1704.4808653623802,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -8854,7 +8854,7 @@
       "display_name": "LAMOST J193418.66+464410.8",
       "star_type": "Unknown",
       "distance_ly": 37052.17177664974,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {
@@ -8890,7 +8890,7 @@
       "display_name": "KOI-2342.01",
       "star_type": "Unknown",
       "distance_ly": 2031.3669052305686,
-      "temperature": NaN
+      "temperature": null
     },
     {
       "position": {

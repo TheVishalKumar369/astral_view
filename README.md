@@ -1,3 +1,33 @@
+# ⚡️ Lightweight Local Setup (No Containers)
+
+You can run the project without Docker or Podman using a Python virtual environment. This is recommended for systems with limited resources.
+
+### 1. Set up a Python virtual environment (Windows example)
+```powershell
+cd P:\exo_planet_cosmos_traveller
+python -m venv venv
+.\venv\Scripts\Activate
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+### 2. Run the desktop app
+```powershell
+python desktop_app\cosmic_explorer.py
+```
+
+### 3. Run scripts as needed
+```powershell
+python scripts\collect_data.py
+python scripts\process_data.py
+```
+
+To deactivate the environment:
+```powershell
+deactivate
+```
+
+> **Note:** Containerization (Docker/Podman) is optional and not required for most development tasks. Use the virtual environment method above for a lightweight setup. The container files are preserved for future use if needed.
 # Cosmic Explorer: Exoplanet 3D Visualization System
 
 ## Overview

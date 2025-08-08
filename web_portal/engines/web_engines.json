@@ -1,0 +1,211 @@
+{
+  "web_engines": {
+    "threejs": {
+      "name": "Three.js Engine",
+      "version": "r158+",
+      "description": "Popular JavaScript 3D library for web-based cosmic exploration",
+      "category": "web",
+      "status": "available",
+      "main_file": "threejs/index.html",
+      "features": [
+        "Cross-platform web access",
+        "WebGL-based rendering",
+        "No installation required",
+        "Easy sharing via URL",
+        "Mobile-friendly",
+        "Real-time 3D graphics",
+        "Shader support",
+        "Physics integration (Cannon.js)"
+      ],
+      "pros": [
+        "Runs in any modern browser",
+        "Cross-platform compatibility",
+        "No local installation",
+        "Easy to share",
+        "Large community",
+        "Extensive documentation"
+      ],
+      "cons": [
+        "Limited to browser capabilities",
+        "Network dependent",
+        "JavaScript performance limits",
+        "Limited file system access"
+      ],
+      "system_requirements": {
+        "browser": "Modern browser with WebGL 2.0",
+        "ram": "4GB recommended",
+        "graphics": "WebGL-compatible GPU",
+        "network": "Optional for local files"
+      },
+      "technologies": [
+        "Three.js",
+        "WebGL",
+        "JavaScript ES6+",
+        "HTML5",
+        "CSS3"
+      ]
+    },
+    "babylonjs": {
+      "name": "Babylon.js Engine", 
+      "version": "6.0+",
+      "description": "Advanced web-based 3D engine with professional features",
+      "category": "web",
+      "status": "planned",
+      "estimated_completion": "Q2 2025",
+      "features": [
+        "Professional 3D rendering",
+        "PBR materials",
+        "Advanced lighting",
+        "Animation system",
+        "Physics integration",
+        "VR/AR support",
+        "Node-based material editor",
+        "Inspector tools"
+      ],
+      "pros": [
+        "Professional-grade features",
+        "Microsoft-backed",
+        "Excellent tooling",
+        "TypeScript support",
+        "Advanced rendering pipeline"
+      ],
+      "cons": [
+        "Larger file size",
+        "More complex API",
+        "Higher system requirements",
+        "Steeper learning curve"
+      ],
+      "system_requirements": {
+        "browser": "Modern browser with WebGL 2.0",
+        "ram": "8GB recommended",
+        "graphics": "Dedicated GPU preferred",
+        "network": "Required for CDN assets"
+      }
+    },
+    "webgpu": {
+      "name": "WebGPU Engine",
+      "version": "Draft spec",
+      "description": "Next-generation web graphics API for advanced 3D applications",
+      "category": "web",
+      "status": "research",
+      "estimated_completion": "Q4 2025",
+      "features": [
+        "Native GPU performance",
+        "Advanced compute shaders",
+        "Multi-threading support",
+        "Lower-level graphics control",
+        "Better performance than WebGL",
+        "Future web standard"
+      ],
+      "pros": [
+        "Near-native performance",
+        "Advanced graphics features",
+        "Multi-threading",
+        "Future-proof technology"
+      ],
+      "cons": [
+        "Limited browser support",
+        "Experimental status",
+        "Complex API",
+        "Requires modern hardware"
+      ],
+      "system_requirements": {
+        "browser": "Chrome/Edge Canary with WebGPU enabled",
+        "ram": "8GB minimum",
+        "graphics": "Modern GPU with Vulkan/D3D12/Metal support",
+        "os": "Windows 10+, macOS 11+, or Linux"
+      }
+    },
+    "webxr": {
+      "name": "WebXR Cosmic Explorer",
+      "version": "WebXR Device API",
+      "description": "Virtual and Augmented Reality cosmic exploration in the browser",
+      "category": "web",
+      "status": "research", 
+      "estimated_completion": "Q3 2025",
+      "features": [
+        "VR headset support",
+        "AR on mobile devices",
+        "6DOF tracking",
+        "Hand tracking",
+        "Immersive cosmic exploration",
+        "Spatial audio",
+        "Cross-platform XR"
+      ],
+      "pros": [
+        "Immersive experience",
+        "No app store needed",
+        "Cross-platform XR",
+        "Future of web experiences"
+      ],
+      "cons": [
+        "Requires VR/AR hardware",
+        "Limited browser support",
+        "High system requirements",
+        "Complex development"
+      ],
+      "system_requirements": {
+        "browser": "Chrome/Firefox with WebXR support",
+        "hardware": "VR headset or AR-capable device",
+        "ram": "16GB recommended",
+        "graphics": "High-end GPU for VR"
+      }
+    },
+    "progressive_web_app": {
+      "name": "PWA Cosmic Explorer",
+      "version": "PWA Spec",
+      "description": "Progressive Web App for offline cosmic exploration",
+      "category": "web",
+      "status": "planned",
+      "estimated_completion": "Q1 2025",
+      "features": [
+        "Offline functionality",
+        "Installable from browser",
+        "Native app experience",
+        "Service worker caching",
+        "Background sync",
+        "Push notifications",
+        "Responsive design"
+      ],
+      "pros": [
+        "Works offline",
+        "App-like experience",
+        "No app store needed",
+        "Automatic updates",
+        "Cross-platform"
+      ],
+      "cons": [
+        "Limited native features",
+        "iOS limitations",
+        "Cache management complexity",
+        "Service worker debugging"
+      ],
+      "system_requirements": {
+        "browser": "Modern browser with PWA support",
+        "ram": "4GB minimum",
+        "storage": "500MB for offline data",
+        "network": "Initial download required"
+      }
+    }
+  },
+  "shared_features": {
+    "data_integration": [
+      "Real astronomical data loading",
+      "JSON-based cosmic catalogs", 
+      "Dynamic object generation",
+      "Search and filtering"
+    ],
+    "visualization": [
+      "3D stellar positioning",
+      "Color-coded star types",
+      "Exoplanet highlighting",
+      "Deep space objects"
+    ],
+    "interaction": [
+      "Mouse/touch navigation",
+      "Keyboard controls",
+      "Object selection",
+      "Information panels"
+    ]
+  }
+}

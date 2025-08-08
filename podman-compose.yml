@@ -2,7 +2,7 @@ services:
   data_service:
     build:
       context: .
-      containerfile: Containerfile.data
+      dockerfile: Containerfile.data
     image: cosmic_explorer_data
     volumes:
       - ./data:/workspace/data
@@ -31,7 +31,7 @@ services:
   desktop_app:
     build:
       context: .
-      containerfile: Containerfile.desktop
+      dockerfile: Containerfile.desktop
     image: cosmic_explorer_desktop
     volumes:
       - ./data:/workspace/data
@@ -60,7 +60,7 @@ services:
   web_portal:
     build:
       context: .
-      containerfile: Containerfile.web
+      dockerfile: Containerfile.web
     image: cosmic_explorer_web
     ports:
       - "3000:3000"

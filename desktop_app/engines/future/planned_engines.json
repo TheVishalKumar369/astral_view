@@ -1,0 +1,142 @@
+{
+  "planned_engines": {
+    "godot": {
+      "name": "Godot Engine",
+      "version": "4.x",
+      "description": "Open-source game engine with advanced scripting and visual editor",
+      "category": "desktop",
+      "status": "planned",
+      "estimated_completion": "Q2 2025",
+      "features": [
+        "Visual node-based editor",
+        "GDScript and C# support",
+        "Advanced physics (3D)",
+        "Built-in animation system",
+        "Cross-platform deployment",
+        "VR/AR support"
+      ],
+      "pros": [
+        "Free and open-source",
+        "Visual editor interface",
+        "Excellent documentation",
+        "Active community support"
+      ],
+      "cons": [
+        "Requires Godot installation",
+        "Different workflow from Python",
+        "Learning curve for new engine"
+      ],
+      "system_requirements": {
+        "godot_version": "4.2+",
+        "ram": "4GB minimum",
+        "graphics": "OpenGL 3.3 / Vulkan support",
+        "disk": "200MB"
+      }
+    },
+    "unity": {
+      "name": "Unity Engine",
+      "version": "2022.3 LTS",
+      "description": "Industry-standard game engine for professional applications",
+      "category": "desktop",
+      "status": "planned",
+      "estimated_completion": "Q3 2025",
+      "features": [
+        "Professional visual editor",
+        "C# scripting",
+        "Advanced rendering pipeline (URP/HDRP)",
+        "Rich asset store",
+        "Cross-platform deployment",
+        "VR/AR/XR support",
+        "Advanced physics",
+        "Visual scripting (Bolt)"
+      ],
+      "pros": [
+        "Industry standard",
+        "Extensive documentation",
+        "Large community",
+        "Professional tools",
+        "Rich asset ecosystem"
+      ],
+      "cons": [
+        "Commercial license for revenue >$100k",
+        "Large installation size",
+        "Complex for simple projects",
+        "Not Python-based"
+      ],
+      "system_requirements": {
+        "unity_version": "2022.3+",
+        "ram": "8GB minimum, 16GB recommended",
+        "graphics": "Dedicated GPU recommended",
+        "disk": "4GB+ for Unity + projects"
+      }
+    },
+    "bevy": {
+      "name": "Bevy Engine",
+      "version": "0.12+",
+      "description": "Modern Rust-based game engine with ECS architecture",
+      "category": "desktop", 
+      "status": "research",
+      "estimated_completion": "Q4 2025",
+      "features": [
+        "Entity Component System (ECS)",
+        "Data-driven architecture",
+        "Modern Rust performance",
+        "Hot reloading",
+        "Cross-platform",
+        "Modular design"
+      ],
+      "pros": [
+        "Cutting-edge technology",
+        "Excellent performance",
+        "Memory safety",
+        "Modern architecture"
+      ],
+      "cons": [
+        "Requires Rust knowledge",
+        "Still in development",
+        "Smaller community",
+        "Learning curve"
+      ],
+      "system_requirements": {
+        "rust": "1.70+",
+        "ram": "4GB minimum",
+        "graphics": "Modern GPU recommended",
+        "disk": "100MB"
+      }
+    },
+    "blender_integration": {
+      "name": "Blender Integration",
+      "version": "4.0+",
+      "description": "Direct integration with Blender's viewport and Python API",
+      "category": "desktop",
+      "status": "research",
+      "estimated_completion": "Q1 2026",
+      "features": [
+        "Native Blender viewport",
+        "Python scripting integration",
+        "Advanced materials and shading",
+        "Animation support",
+        "Render engine access",
+        "Geometry nodes integration"
+      ],
+      "pros": [
+        "Professional 3D tools",
+        "Advanced rendering",
+        "Python-based",
+        "Free and open-source"
+      ],
+      "cons": [
+        "Requires Blender installation",
+        "Complex API",
+        "Heavy resource usage",
+        "Steep learning curve"
+      ],
+      "system_requirements": {
+        "blender": "4.0+",
+        "ram": "8GB minimum, 16GB recommended",
+        "graphics": "Dedicated GPU strongly recommended",
+        "disk": "2GB"
+      }
+    }
+  }
+}
